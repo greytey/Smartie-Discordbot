@@ -54,7 +54,7 @@ namespace Smartie.config
             commands = client.UseCommandsNext(commandsConfig);
 
             // every command class needs to be registered 
-            commands.RegisterCommands<Exemple>();
+            commands.RegisterCommands<Help>();
 
             await client.ConnectAsync();
             await Task.Delay(-1);
