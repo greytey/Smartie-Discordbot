@@ -31,6 +31,7 @@ namespace Smartie.commands
         public async Task rollDice(CommandContext ctx, string dice)
         {
             string possibleNumber = dice.Substring(1);
+            lastAsked = null;
             try
             {
                 int dicelimit = int.Parse(possibleNumber);
