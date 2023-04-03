@@ -13,7 +13,12 @@ namespace Smartie.commands
         [Command("help")]
         public async Task helpCommand(CommandContext ctx)
         {
-            await ctx.Channel.SendMessageAsync("To this point, the only command available is 'help'. Commands start with 'Hey Smartie '");
+            await ctx.Channel.SendMessageAsync("Commmands:" +
+                "\n- help //To get all Smartie-Commands" +
+                "\n- dnd dice d<max number of die> //To roll a die with a set max amount of sides" +
+                "\n- dnd create //Creates a new dnd character with background, race and class" +
+                "\n\nCommands should always start with 'Hey Smartie '");
+
         }
     }
 }
