@@ -1,10 +1,5 @@
 ﻿using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.CommandsNext;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DSharpPlus.Entities;
 
 namespace Smartie.commands
@@ -75,6 +70,15 @@ namespace Smartie.commands
             lastAsked = ctx.Member;
             await ctx.Channel.SendMessageAsync(firstPart + pronoun + backgrounds.ElementAt(indexBackground) + " " + races.ElementAt(indexRace) + " " + classes.ElementAt(indexClass) + "?");
 
+        }
+
+        [Command("help")]
+        public async Task help(CommandContext ctx)
+        {
+            await ctx.Channel.SendMessageAsync("dnd has the following commands:\n" +
+                "- dnd dice d<number> : rolls a dice with the given amount\n" +
+                "- dnd create : creates a new character for you (background, race and class)" +
+                "\n\n**Remember**: Commands should always start with 'Hey Smartie '");
         }
     }
 }
