@@ -16,9 +16,8 @@ namespace Smartie.commands
             await ctx.Channel.SendMessageAsync("Commmands:" +
                 "\n- help //To get all Smartie-Commands" +
                 "\n- dnd help //different dnd commands and what they do" +
+                "\n- chatgpt help //more about the chatgpt command" +
                 "\n\nCommands should always start with 'Hey Smartie '");
-
         }
-
     }
 }
