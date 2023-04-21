@@ -56,6 +56,7 @@ namespace Smartie.config
             // every command class needs to be registered 
             commands.RegisterCommands<Help>();
             commands.RegisterCommands<DnD>();
+            commands.RegisterCommands<ChatGPT>();
 
             await client.ConnectAsync();
             await Task.Delay(-1);

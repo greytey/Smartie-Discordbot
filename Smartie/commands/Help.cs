@@ -1,5 +1,6 @@
 ﻿using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
+using DSharpPlus.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +14,17 @@ namespace Smartie.commands
         [Command("help")]
         public async Task helpCommand(CommandContext ctx)
         {
-            await ctx.Channel.SendMessageAsync("Commmands:" +
+            var embededMessage = new DiscordEmbedBuilder
+            {
+                Title = "Smartie help",
+                Description = "Commmands:" +
                 "\n- help //To get all Smartie-Commands" +
                 "\n- dnd help //different dnd commands and what they do" +
-                "\n\nCommands should always start with 'Hey Smartie '");
-
+                "\n- chatgpt help //more about the chatgpt command" +
+                "\n\nCommands should always start with 'Hey Smartie '",
+                Color = DiscordColor.Blue,
+            };
+            await ctx.Channel.SendMessageAsync(embed: embededMessage);
         }
-
     }
 }
