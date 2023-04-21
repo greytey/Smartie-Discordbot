@@ -64,7 +64,7 @@ namespace Smartie.commands
             {
                 Title = "ChatGPT help",
                 Description = "chatgpt has the following command:\n" +
-                "- chatgpt ask <what you want to ask> : asks chatgpt whatever you typed" +
+                "- chatgpt ask <what you want to ask> //asks chatgpt whatever you typed" +
                 "\n\n**Remember**: Commands should always start with 'Hey Smartie '",
                 Color = DiscordColor.Blue,
             };
