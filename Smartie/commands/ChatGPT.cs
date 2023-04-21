@@ -13,15 +13,16 @@ namespace Smartie.commands
 {
     public class ChatGPT : BaseCommandModule
     {
+
+        OpenAIAPI openAiApi = new OpenAIAPI("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");
+
+
         [Command("chatgpt")]
         public async Task askChatGPT(CommandContext ctx, params string[] userinput)
         {
             string userinputString = string.Join(' ', userinput);
 
-            OpenAIAPI openAiApi = new OpenAIAPI("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");
-
             var chat = openAiApi.Chat.CreateConversation();
-            chat.AppendSystemMessage("Type in a query");
 
             chat.AppendUserInput(userinputString);
 
