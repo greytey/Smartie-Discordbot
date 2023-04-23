@@ -8,9 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="tempMusic\**" />
+    <EmbeddedResource Remove="tempMusic\**" />
+    <None Remove="tempMusic\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CliWrap" Version="3.6.0" />
     <PackageReference Include="DSharpPlus" Version="4.4.0" />
     <PackageReference Include="DSharpPlus.CommandsNext" Version="4.4.0" />
     <PackageReference Include="DSharpPlus.Interactivity" Version="4.4.0" />
+    <PackageReference Include="DSharpPlus.VoiceNext" Version="4.4.0" />
+    <PackageReference Include="MediaToolkit" Version="1.1.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="OpenAI" Version="1.7.2" />
   </ItemGroup>
