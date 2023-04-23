@@ -45,10 +45,9 @@ namespace Smartie.commands
                 else
                 {
                     connection = await voiceClient.ConnectAsync(channel);
-                    connection.Disconnect();
                     DiscordEmbedBuilder embededMessage = new DiscordEmbedBuilder()
                     {
-                        Title = "Disconnected",
+                        Title = "Connected",
                         Color = DiscordColor.Violet
                     };
                     await ctx.Channel.SendMessageAsync(embed: embededMessage);
