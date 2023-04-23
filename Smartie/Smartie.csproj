@@ -8,10 +8,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="tempMusic\**" />
+    <EmbeddedResource Remove="tempMusic\**" />
+    <None Remove="tempMusic\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CliWrap" Version="3.6.0" />
     <PackageReference Include="DSharpPlus" Version="4.4.0" />
     <PackageReference Include="DSharpPlus.CommandsNext" Version="4.4.0" />
     <PackageReference Include="DSharpPlus.Interactivity" Version="4.4.0" />
+    <PackageReference Include="DSharpPlus.VoiceNext" Version="4.4.0" />
+    <PackageReference Include="MediaToolkit" Version="1.1.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="VideoLibrary" Version="3.2.3" />
+    <PackageReference Include="YoutubeExplode" Version="6.2.12" />
   </ItemGroup>
 
 </Project>

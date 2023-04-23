@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Smartie.commands;
+using DSharpPlus.VoiceNext;
 
 namespace Smartie.config
 {
@@ -18,6 +19,8 @@ namespace Smartie.config
         public DiscordClient client { get; private set; }
         public InteractivityExtension interactivity { get; private set; }
         public CommandsNextExtension commands { get; private set; }
+
+        public VoiceNextExtension voice { get; private set; }
 
         public async Task runAsync()
         {
@@ -56,6 +59,9 @@ namespace Smartie.config
             // every command class needs to be registered 
             commands.RegisterCommands<Help>();
             commands.RegisterCommands<DnD>();
+            commands.RegisterCommands<Music>();
+
+            voice = client.UseVoiceNext();
 
             await client.ConnectAsync();
             await Task.Delay(-1);
