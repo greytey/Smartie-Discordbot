@@ -15,6 +15,7 @@ using YoutubeExplode.Videos.Streams;
 using CliWrap;
 using System.IO;
 using System.Runtime.CompilerServices;
+using DSharpPlus.Entities;
 
 namespace Smartie.commands
 {
@@ -28,20 +29,37 @@ namespace Smartie.commands
             var connection = voiceClient.GetConnection(ctx.Guild);
             if (connection != null)
             {
-                await ctx.Channel.SendMessageAsync("Already connected to a channel in this server.");
-            }
+                    DiscordEmbedBuilder embededMessage = new DiscordEmbedBuilder()
+                    {
+                        Title = "Ups",
+                        Description = "Already connected to a voice channel in this server.",
+                        Color = DiscordColor.Red
+                    };
+                    await ctx.Channel.SendMessageAsync(embed: embededMessage);
+                }
             else
             {
                 var channel = ctx.Member?.VoiceState?.Channel;
                 if (channel == null)
                 {
-                    await ctx.Channel.SendMessageAsync("Sorry, you have to be in a channel.");
-
+                    DiscordEmbedBuilder embededMessage = new DiscordEmbedBuilder()
+                    {
+                        Title = "Ups",
+                        Description = "Sorry, you have to be connected to a channel in this server.",
+                        Color = DiscordColor.Red
+                    };
+                    await ctx.Channel.SendMessageAsync(embed: embededMessage);
                 }
                 else
                 {
                     connection = await voiceClient.ConnectAsync(channel);
-                    await ctx.Channel.SendMessageAsync("Connected");
+                    connection.Disconnect();
+                    DiscordEmbedBuilder embededMessage = new DiscordEmbedBuilder()
+                    {
+                        Title = "Disconnected",
+                        Color = DiscordColor.Violet
+                    };
+                    await ctx.Channel.SendMessageAsync(embed: embededMessage);
                 }
             }
 
@@ -54,13 +72,24 @@ namespace Smartie.commands
 
             var connection = voiceClient.GetConnection(ctx.Guild);
             if (connection == null)
-            {
-                await ctx.Channel.SendMessageAsync("Not connected to this server currently.");
-            }
+                {
+                    DiscordEmbedBuilder embededMessage = new DiscordEmbedBuilder()
+                    {
+                        Title = "Ups",
+                        Description = "I am not connected to this server currently, make me join with 'Hey Smartie music join'.",
+                        Color = DiscordColor.Red
+                    };
+                    await ctx.Channel.SendMessageAsync(embed: embededMessage);
+                }
             else
             {
                 connection.Disconnect();
-                await ctx.Channel.SendMessageAsync("Disconnected");
+                DiscordEmbedBuilder embededMessage = new DiscordEmbedBuilder()
+                {
+                    Title = "Disconnected",
+                    Color = DiscordColor.Violet
+                };
+                await ctx.Channel.SendMessageAsync(embed: embededMessage);
             }
 
         }
@@ -73,8 +102,13 @@ namespace Smartie.commands
             var connection = voiceClient.GetConnection(ctx.Guild);
             if (connection == null)
             {
-                await ctx.Channel.SendMessageAsync("Not connected to this server currently. Use 'join' to make me join your channel.");
-
+                DiscordEmbedBuilder embededMessage = new DiscordEmbedBuilder()
+                {
+                    Title = "Ups",
+                    Description = "I am not connected to this server currently, make me join with 'Hey Smartie music join'.",
+                    Color = DiscordColor.Red
+                };
+                await ctx.Channel.SendMessageAsync(embed: embededMessage);
             }
             else
             {
@@ -91,22 +125,48 @@ namespace Smartie.commands
                         .WithStandardInputPipe(PipeSource.FromStream(stream))
                         .WithStandardOutputPipe(PipeTarget.ToStream(memoryStream))
                         .ExecuteAsync(cancellationTokenSource.Token);
-                    Console.WriteLine($"Downloaded {memoryStream.Length} bytes of audio stream from {url}");
                     await connection.SendSpeakingAsync(true);
 
                     VoiceTransmitSink transmit = connection.GetTransmitSink();
                     transmit.VolumeModifier = 1.5f;
                     await memoryStream.CopyToAsync(connection.GetTransmitSink());
-
+                    var video = await yt.Videos.GetAsync(url);
+                    DiscordEmbedBuilder embededMessage = new DiscordEmbedBuilder()
+                    {
+                        Title = "Playing...",
+                        Description = video.Title + " by " + video.Author,
+                        Color = DiscordColor.Violet
+                    };
+                    await ctx.Channel.SendMessageAsync(embed: embededMessage);
                     await connection.SendSpeakingAsync(false);
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Error: {ex.Message}");
-                    await ctx.Channel.SendMessageAsync("Error: " + ex.Message);
+                    DiscordEmbedBuilder embededMessage = new DiscordEmbedBuilder()
+                    {
+                        Title = "Error",
+                        Description = "There was an error, try again!",
+                        Color = DiscordColor.Red
+                    };
+                    await ctx.Channel.SendMessageAsync(embed: embededMessage);
                 }
             }
                  
+        }
+
+        [Command("help")]
+        public async Task help(CommandContext ctx)
+        {
+            DiscordEmbedBuilder embededMessage = new DiscordEmbedBuilder()
+            {
+                Title = "Music help",
+                Description = "Music has the following commands:\n" +
+                "- music join \\ bot joines the channel the user is currently in\n" +
+                "- music leave \\ bot leaves the channel he is currently in\n" +
+                "\n\n**Remember**: Commands should always start with 'Hey Smartie '",
+                Color = DiscordColor.Blue
+            };
+            await ctx.Channel.SendMessageAsync(embed: embededMessage);
         }
     }
 }
