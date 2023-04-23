@@ -59,6 +59,7 @@ namespace Smartie.config
             // every command class needs to be registered 
             commands.RegisterCommands<Help>();
             commands.RegisterCommands<DnD>();
+            commands.RegisterCommands<ChatGPT>();
             commands.RegisterCommands<Music>();
 
             voice = client.UseVoiceNext();
