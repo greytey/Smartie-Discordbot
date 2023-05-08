@@ -22,6 +22,7 @@ namespace Smartie.commands
                 "\n- dnd help //different dnd commands and what they do" +
                 "\n- chatgpt help //more about the chatgpt command" +
                 "\n- music help //more about the music player commands" +
+                "\n- textgame help //more about the textgame commands" +
                 "\n\n**Remember**: Commands should always start with 'Hey Smartie '",
                 Color = DiscordColor.Blue,
             };
