@@ -28,6 +28,7 @@ namespace Smartie.commands
             {
                 string userinputString = string.Join(' ', userinput);
 
+                // creating an object that communicates with the openai api
                 OpenAIAPI openAiApi = new OpenAIAPI("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");
 
                 var chat = openAiApi.Chat.CreateConversation();

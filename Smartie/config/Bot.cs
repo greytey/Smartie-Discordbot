@@ -61,6 +61,7 @@ namespace Smartie.config
             commands.RegisterCommands<DnD>();
             commands.RegisterCommands<ChatGPT>();
             commands.RegisterCommands<Music>();
+            commands.RegisterCommands<SunriseSet>();
             commands.RegisterCommands<TextGame>();
 
             voice = client.UseVoiceNext();

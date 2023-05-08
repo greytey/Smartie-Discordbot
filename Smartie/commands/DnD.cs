@@ -10,6 +10,7 @@ namespace Smartie.commands
     {
 
         Random random = new Random();
+        //All dnd races, backgrounds and classes to generate a random combination later on
         string[] races = new string[] { "Dragonborn", "Dwarf", "Elf", "Gnome", "Half-Elf", "Half-Orc", "Halfling", "Human", "Tiefling",
                 "Arakocra", "Aasimar", "Changeling", "Deep Gnome", "Duergar", "Eladrin", "Fairy", "Firbolg", "Genasi", "Githyanki", "Githzerai", "Goliath",
                 "Harengon", "Kenku", "Locathah", "Owlin", "Satyr", "Sea Elf", "Shadar-Kai", "Tabaxi", "Tortle", "Triton", "Verdan", "Bugbear", "Centaur",
@@ -21,6 +22,7 @@ namespace Smartie.commands
                 "Soldier", "Spy", "Urban Bounty Hunter", "Urchin", "Uthgardt Tribe Member", "Waterdhavina Noble", "Witchlight Hand" };
         string[] classes = new string[] { "Artificer", "Barbarian", "Bard", "Cleric", "Druid", "Fighter", "Monk",
                 "Paladin", "Ranger", "Rogue", "Sorcerer", "Warlock", "Wizard" };
+        //To check if someone asks for a new character twice in a row
         DiscordMember lastAsked = null;
 
         [Command("roll")]
@@ -39,6 +41,7 @@ namespace Smartie.commands
                 }
                 int dicelimit = int.Parse(possibleNumber);
                 int diceroll = random.Next(dicelimit) + 1;
+                //Special message for nat 1 on a d20
                 if(diceroll == 1 && dicelimit == 20) 
                 {
                     DiscordEmbedBuilder embededMessage = new DiscordEmbedBuilder()
@@ -49,6 +52,7 @@ namespace Smartie.commands
                     };
                     await ctx.Channel.SendMessageAsync(embed: embededMessage);
                 }
+                //Special message for a nat 20 on a d20
                 else if (diceroll == 20 && dicelimit == 20) {
                     DiscordEmbedBuilder embededMessage = new DiscordEmbedBuilder()
                     {
@@ -58,6 +62,7 @@ namespace Smartie.commands
                     };
                     await ctx.Channel.SendMessageAsync(embed: embededMessage);
                 }
+                //Normal answer
                 else
                 {
                     DiscordEmbedBuilder embededMessage = new DiscordEmbedBuilder()
@@ -70,6 +75,7 @@ namespace Smartie.commands
                 }
             } catch (Exception ex)
             {
+                //Error if there is no real number
                 DiscordEmbedBuilder embededMessage = new DiscordEmbedBuilder()
                 {
                     Title = "Error",
