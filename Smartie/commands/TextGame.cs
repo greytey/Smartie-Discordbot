@@ -206,7 +206,7 @@ namespace Smartie.commands
                 case "Hercules":
                     var fistDamage = new Random().Next(20, 31);
                     var slamDamage = new Random().Next(10, 21);
-                    DiscordEmbedBuilder embededMessage = new DiscordEmbedBuilder()
+                    embededMessage = new DiscordEmbedBuilder()
                     {
                         Title = "What attack do you want to use?",
                         Description = "- Type 'fist' to use Fists of Hercules deals low damage\n" +
